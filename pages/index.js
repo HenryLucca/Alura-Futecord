@@ -70,7 +70,7 @@ export default function HomePage() {
           styleSheet={{
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             backgroundColor: appConfig.theme.colors.primary[500],
-            backgroundImage: 'url(http://t2.gstatic.com/images?q=tbn:ANd9GcTBLkUokRWxieS2uNcbZzQXKk8vXCHIF9JAhTcv2AXkfcIv5PhO)',
+            backgroundImage: 'url(https://img.r7.com/images/neymar-brasil-x-croacia-03062018163909532)',
             backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
           }}
         >
