@@ -1,35 +1,8 @@
 import appConfig from '../config.json';
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
+import { useRouter } from 'next/router';
+import React from 'react';
 
-{/* CSS Global */}
-function GlobalStyle() {
-    return (
-      <style global jsx>{`
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-          list-style: none;
-        }
-        body {
-          font-family: 'Open Sans', sans-serif;
-        }
-        /* App fit Height */ 
-        html, body, #__next {
-          min-height: 100vh;
-          display: flex;
-          flex: 1;
-        }
-        #__next {
-          flex: 1;
-        }
-        #__next > * {
-          flex: 1;
-        }
-        /* ./App fit Height */ 
-      `}</style>
-    );
-  }
 
   function Title(props) {
     const Tag = props.tag || 'h1';
@@ -61,16 +34,18 @@ function HomePage() {
 export default HomePage
 */
 export default function HomePage() {
-    const username = 'HenryLucca';
+    /* const username = 'HenryLucca'; */
+    const [username, setUsername] = React.useState('henrylucca');
+    const roteamento = useRouter();
+
   
     return (
       <>
-        <GlobalStyle />
         <Box
           styleSheet={{
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             backgroundColor: appConfig.theme.colors.primary[500],
-            backgroundImage: 'url(http://t2.gstatic.com/images?q=tbn:ANd9GcTBLkUokRWxieS2uNcbZzQXKk8vXCHIF9JAhTcv2AXkfcIv5PhO)',
+            backgroundImage: 'url(https://img.r7.com/images/neymar-brasil-x-croacia-03062018163909532)',
             backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
           }}
         >
@@ -92,17 +67,39 @@ export default function HomePage() {
             {/* Formulário */}
             <Box
               as="form"
+              onSubmit={function (eventInfo) {
+                eventInfo.preventDefault();
+                roteamento.push('/chat', { username });
+              }}
               styleSheet={{
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
                 width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
               }}
             >
-              <Title tag="h2">Boas vindas de volta!</Title>
+              <Title tag="h2">Vem pro fut!</Title>
               <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
                 {appConfig.name}
               </Text>
+              
+              {/* Entrada de Username do usuário */}
+              
+              {/* <input
+                type="text"
+                value = {username}
+                // Aceitar mudança de value e tentar colocar o novo valor em username 
+                onChange={async function Handler(){
+                   const valor = event.target.value;
+                   // await timeout(100); 
+                   setUsername(valor);
+                }}
+              /> */}
   
               <TextField
+                value = {username}
+                onChange={async function Handler(){
+                   const valor = event.target.value;
+                   setUsername(valor);
+                }}
                 fullWidth
                 textFieldColors={{
                   neutral: {
@@ -149,7 +146,8 @@ export default function HomePage() {
                   borderRadius: '50%',
                   marginBottom: '16px',
                 }}
-                src={`https://github.com/${username}.png`}
+                
+                src= {username.length > 2 ? `https://github.com/${username}.png`: `https://img.icons8.com/color/48/000000/no-image.png`}
               />
               <Text
                 variant="body4"
@@ -169,3 +167,8 @@ export default function HomePage() {
       </>
     );
   }
+
+  function timeout(delay) {
+    return new Promise( res => setTimeout(res, delay) );
+    //await timeout(1000);
+}
