@@ -167,11 +167,8 @@ export default function HomePage() {
       </>
     );
   }
-<<<<<<< HEAD
 
   function timeout(delay) {
     return new Promise( res => setTimeout(res, delay) );
     //await timeout(1000);
 }
-=======
->>>>>>> 0b443ac663c9bd82dc7e3afe9b5d6218726fb256
